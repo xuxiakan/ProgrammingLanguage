@@ -299,9 +299,9 @@ public class Tokenizer {
      *          return true if {@code token} is a special symbol,
      *          otherwise, return false.
      */
-    private static boolean isSpecialSymbols(String token){
+    public static boolean isSpecialSymbols(String token){
         boolean isValid = true;
-        Pattern specialSymbols = Pattern.compile(";|,|=|!|[|]|(|)|\\+|-|\\*|!=|==|>=|<=|>|<");
+        Pattern specialSymbols = Pattern.compile(";|,|=|!|\\[|\\]|\\(|\\)|\\+|-|\\*|!=|==|>=|<=|>|<");
 
         // Compare with special symbols regex pattern
         if(token.length() < 1){
@@ -369,6 +369,7 @@ public class Tokenizer {
     public static void main(String args[]) {
 
         // initialize tokenizer object from argument.
+
         Tokenizer tokens = new Tokenizer(args[0]);
 
         // keep read and print next token until find EOF token.
