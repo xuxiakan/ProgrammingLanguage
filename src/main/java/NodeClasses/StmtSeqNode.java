@@ -21,24 +21,27 @@ public class StmtSeqNode {
     public void parseStmtSeq(Tokenizer t){
         stmtNode.parseStmt(t);
 
-        // TODO: how to check next is stmt-seq?
         // if next is stmt-seq
-        if(t.currentToken.equals("stmt-seq")){
+        String tok = t.currentToken;
+        if(tok.equals("if") || tok.equals("while")|| tok.equals("read")|| tok.equals("write") || t.isValidIdentifier(tok)){//TODO case incomplete
             this.stmtSeqNode = new StmtSeqNode();
             this.altNo = 2;
-            stmtSeqNode.parseStmtSeq(t);
+            this.stmtSeqNode.parseStmtSeq(t);
         }
-        else{
-            System.out.println("Debug: next token is " + t.currentToken + "make sure its not stmt\n");
+        else if(!tok.equals("end") && !tok.equals("else")){
+            System.err.println("Parser error(Line " + t.lineNum+"): Invalid element \""
+                    + t.currentToken + "\" found in Stmt");
+            System.exit(2);
         }
     }
 
-    public void printStmtSeq(){
-        stmtNode.printStmt();
-        if(altNo == 2){
-            stmtSeqNode.printStmtSeq();
+    public void printStmtSeq(int tabs) {
+        this.stmtNode.printStmt(tabs);
+        if (this.altNo == 2) {
+            this.stmtSeqNode.printStmtSeq(tabs);
         }
     }
+
 
     public void execStmtSeq(){
         //TODO: implement for next Assignment;

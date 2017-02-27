@@ -8,6 +8,6 @@ import Tokenizer.Tokenizer;
 
 public interface IfNode_interface {
     void parseIf(Tokenizer t);
-    void printIf();
+    void printIf(int tabs);
     void execIf();
 }

@@ -1,0 +1,8 @@
+ program
+
+
+  int X;
+  begin
+    X = 2 5;
+    write X ;
+  end

@@ -13,15 +13,33 @@ public class InputNode {
     }
 
     public void parseInput(Tokenizer t){
-        t.nextToken(); // get rid of "read"
+        if(t.currentToken.equals("read")){
+            t.nextToken(); // get rid of "read"
+        }
+        else{
+            System.err.println("Parser error(Line " + t.lineNum+"): InputNode expects 'read', " +
+                    "but currentToken is: '" + t.currentToken + "'");
+            System.exit(2);
+        }
+
         id_list.parseIdList(t);
-        t.nextToken(); // get rid of ";"
+        if(t.currentToken.equals(";")){
+            t.nextToken(); // get rid of ";"
+        }
+        else{
+            System.err.println("Parser error(Line " + t.lineNum+"): InputNode expects ';', " +
+                    "but currentToken is: '" + t.currentToken + "'");
+            System.exit(2);
+        }
     }
 
-    public void printInput(){
-        System.out.print("read");
+    public void printInput(int tabs){
+        for(int i = 0; i < tabs; i++){
+            System.out.print("\t");
+        }
+        System.out.print("read ");
         id_list.printIdList();
-        System.out.print(";");
+        System.out.print(";\n");
     }
 
     public void execInput(){

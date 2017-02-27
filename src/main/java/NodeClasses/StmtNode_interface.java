@@ -8,6 +8,6 @@ import Tokenizer.Tokenizer;
 
 public interface StmtNode_interface {
     void parseStmt(Tokenizer t);
-    void printStmt();
+    void printStmt(int tabs);
     void execStmt();
 }

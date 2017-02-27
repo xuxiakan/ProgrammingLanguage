@@ -19,7 +19,7 @@ public class Tokenizer {
     /**input file streaming*/
     private static Scanner file_scanner;
     /**lineNum indicate current position of input file, used when print out error message*/
-    private static int lineNum;
+    public static int lineNum;
     /**Tokenizer read input stream line by line*/
     private static String currentLine;
     /**representation of current token*/
@@ -35,6 +35,11 @@ public class Tokenizer {
      */
     public Tokenizer(String file_name)
     {
+        // clean out memory
+        this.currentToken = null;
+        this.currentLine = null;
+        lineNum = 0;
+
         // set up input stream from the file.
         try{
             file_scanner= new Scanner(new FileReader(file_name));
@@ -44,7 +49,7 @@ public class Tokenizer {
                 lineNum = 1;
             }
             else{
-                System.out.println("Error: No token loaded. Line: " + lineNum);
+                System.err.println("Error: No token loaded. Line: " + lineNum);
             }
         }
         catch (IOException e) {
@@ -63,14 +68,10 @@ public class Tokenizer {
      * @requires <pre> currentToken is not EOF, although the method will handle this case
      */
     public static void nextToken(){
-        // case: currentToken is end, next token should be EOF
-        if(currentToken!=null && currentToken.equals("end")){
-            currentToken = "EOF";
-            return;
-        }
+
         // case: currentToken is EOF, no next token exist and error message will be displayed.
-        else if(currentToken!=null && currentToken.equals("EOF")){
-            System.out.print("Error(Line " + lineNum + "): nextToken cannot be called at the end of file");
+        if(currentToken!=null && currentToken.equals("EOF")){
+            System.out.print("Tokenizer error(Line " + lineNum + "): nextToken cannot be called at the end of file");
             return;
         }
 
@@ -78,10 +79,25 @@ public class Tokenizer {
         int numOfBeginningSpaces = 0;
 
         // When the current line is empty or all white spaces, read next line
-        if(currentLine.replaceAll("\\s","").length() == 0){
-            currentLine = file_scanner.nextLine();
-            // increment current line number by 1
-            lineNum++;
+        while(currentLine.replaceAll("\\s","").length() == 0){
+            if(file_scanner.hasNext()){
+                currentLine = file_scanner.nextLine();
+                // increment current line number by 1
+                lineNum++;
+            }
+            else if(currentToken.equals("end")){
+                currentToken = "EOF";
+                // read last token from file, close input stream
+                file_scanner.close();
+                return;
+            }
+            else{
+                System.err.println("Debug: impossible case in Tokenizer reached.");
+                currentToken = "EOF";
+                // read last token from file, close input stream
+                file_scanner.close();
+                return;
+            }
         }
 
         // Read character by character from current line
@@ -127,13 +143,9 @@ public class Tokenizer {
 
         // check nextToken is legal, if not, output error message.
         if(!isSpecialSymbols(nextToken)&&!isReservedWords(nextToken)&&!isValidIdentifier(nextToken)&&!isValidInt(nextToken)){
-            System.out.println("Error(Line " + lineNum + "): unidentified token \"" + nextToken + "\" found.");
+            //System.out.println("Check currentToken is :" + currentToken);
+            System.err.println("Tokenizer error(Line " + lineNum + "): unidentified token \"" + nextToken + "\" found.");
             System.exit(1);
-        }
-
-        // read last token from file, close input stream
-        if (nextToken.equals("end")) {
-            file_scanner.close();
         }
 
         // set nextToken as current token.
@@ -261,13 +273,13 @@ public class Tokenizer {
         else{
             // Normally should never happened.
             System.out.println("Error, unidentified token ID");
-            System.exit(2);
+            System.exit(1);
         }
         return tokenID;
     }
 
     /**
-     * This method exams {@code token} is a reserved word or not,
+     * This method exams {@code token} is a case-insensitive reserved word or not,
      *  where reserved word defined one of
      *      program, begin, end, int, if, then, else, while, loop, read, write, and, or
      *
@@ -277,13 +289,13 @@ public class Tokenizer {
      *          return true if {@code token} is a reserved word,
      *          otherwise, return false.
      */
-    private static boolean isReservedWords(String token){
+    public static boolean isReservedWords(String token){
         boolean isValid = true;
         Pattern rw = Pattern.compile("program|begin|end|int|if|then|else|while|loop|read|write|and|or");
 
 
         // Compare with reserved words regex pattern
-        if(!rw.matcher(token).matches()){
+        if(!rw.matcher(token.toLowerCase()).matches()){
             isValid = false;
         }
         return isValid;
@@ -323,13 +335,14 @@ public class Tokenizer {
      *          return true if {@code token} follows convention of integers,
      *          otherwise, return false.
      */
-    private static boolean isValidInt(String token){
+    public static boolean isValidInt(String token){
         boolean isValid = true;
         Pattern integers = Pattern.compile("[0-9]+");
 
 
         // Compare with integers regex pattern
         if(token.length() > 8){
+            //TODO display error message when Int invalid length
             isValid = false;
         }
         if(!integers.matcher(token).matches()){
@@ -351,12 +364,13 @@ public class Tokenizer {
      *          return true if {@code token} follows convention of identifiers,
      *          otherwise, return false.
      */
-    private static boolean isValidIdentifier(String token){
+    public static boolean isValidIdentifier(String token){
         boolean isValid = true;
         Pattern identifiers = Pattern.compile("[A-Z][a-z]*[0-9]*");
 
         // Identifier must has a max length of 8 chars.
         if(token.length() > 8){
+            //TODO display error message when ID invalid length
             isValid = false;
         }
         // Compare with identifier regex pattern

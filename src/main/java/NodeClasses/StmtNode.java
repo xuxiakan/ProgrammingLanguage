@@ -26,8 +26,8 @@ public class StmtNode implements StmtNode_interface {
 
     public void parseStmt(Tokenizer t){
         String tok= t.currentToken;
-        t.nextToken();
-        if(tok == "id"){ //tok is an id
+        //t.nextToken();
+        if(t.isValidIdentifier(tok)){ //TODO case incomplete
             assign = new AssignNode();
             altNo= 1;
             assign.parseAssign(t);
@@ -37,7 +37,7 @@ public class StmtNode implements StmtNode_interface {
             altNo= 2;
             ifNode.parseIf(t);
         }
-        else if(tok.equals("loop")){ // tok is loop
+        else if(tok.equals("while")){ // tok is loop
             loop = new LoopNode();
             altNo= 3;
             loop.parseLoop(t) ;
@@ -53,33 +53,39 @@ public class StmtNode implements StmtNode_interface {
             output.parseOutput(t) ;
         }
         else{
-            //TODO: error message
-            System.err.println("Error");
+            // should never happen, this error has been checked by StmtSeqNode
+            System.err.println("Error: invalid Stmt Node, currentToken is: " + tok + ", line number is " + t.lineNum);
+            System.exit(2);
         }
     }
 
-    public void printStmt(){
+    public void printStmt(int tabs){
         if(altNo == 1){
-            assign.printAssign();
+            assign.printAssign(tabs);
         }
         else if(altNo == 2){
-            ifNode.printIf();
+            ifNode.printIf(tabs);
         }
         else if(altNo == 3){
-            loop.printLoop();
+            loop.printLoop(tabs);
         }
         else if(altNo == 4){
-            input.printInput();
+            input.printInput(tabs);
         }
         else if(altNo == 5){
-            output.printOutput();
+            output.printOutput(tabs);
         }
         else{
-            System.err.println("Error: this error should never happened, debug code!");
+            System.err.println("Unexpected error found in printStmt.");
+            System.exit(2);
+            // should never happen
         }
     }
 
     public void execStmt(){
+        //TODO: implement for next Assignment;
+        System.err.println("Error: Not implement until next Assignment");
+        System.exit(99);
         if(altNo == 1){
             assign.execAssign();
         }

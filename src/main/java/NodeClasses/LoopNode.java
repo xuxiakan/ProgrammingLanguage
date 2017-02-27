@@ -16,21 +16,60 @@ public class LoopNode {
     }
 
     public void parseLoop(Tokenizer t){
-        t.nextToken(); // get rid of "while"
+        if(t.currentToken.equals("while")){
+            t.nextToken(); // get rid of "while"
+        }
+        else{
+            System.err.println("Parser error(Line " + t.lineNum+"): LoopNode expects 'while', " +
+                    "but currentToken is: '" + t.currentToken + "'");
+            System.exit(2);
+        }
+
         condition.parseCondition(t);
-        t.nextToken(); // get rid of "loop"
+
+        if(t.currentToken.equals("loop")){
+            t.nextToken(); // get rid of "loop"
+        }
+        else{
+            System.err.println("Parser error(Line " + t.lineNum+"): LoopNode expects 'loop', " +
+                    "but currentToken is: '" + t.currentToken + "'");
+            System.exit(2);
+        }
+
         statementSeq.parseStmtSeq(t);
 
-        t.nextToken(); // get rid of "end"
-        t.nextToken(); // get rid of ";"
+        if(t.currentToken.equals("end")){
+            t.nextToken(); // get rid of "end"
+        }
+        else{
+            System.err.println("Parser error(Line " + t.lineNum+"): LoopNode expects 'end', " +
+                    "but currentToken is: '" + t.currentToken + "'");
+            System.exit(2);
+        }
+
+        if(t.currentToken.equals(";")){
+            t.nextToken(); // get rid of ";"
+        }
+        else{
+            System.err.println("Parser error(Line " + t.lineNum+"): LoopNode expects ';', " +
+                    "but currentToken is: '" + t.currentToken + "'");
+            System.exit(2);
+        }
+
     }
 
-    public void printLoop(){
-        System.out.print("while");
+    public void printLoop(int tabs){
+        for(int i = 0; i < tabs; i++){
+            System.out.print("\t");
+        }
+        System.out.print("while ");
         condition.printCondition();
-        System.out.print("loop");
-        statementSeq.printStmtSeq();
-        System.out.print("end;");
+        System.out.print(" loop\n");
+        statementSeq.printStmtSeq(tabs + 1);
+        for(int i = 0; i < tabs; i++){
+            System.out.print("\t");
+        }
+        System.out.print("end;\n");
     }
 
     public void execLoop(){
