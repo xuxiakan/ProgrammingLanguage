@@ -36,8 +36,8 @@ public class Tokenizer {
     public Tokenizer(String file_name)
     {
         // clean out memory
-        this.currentToken = null;
-        this.currentLine = null;
+        this.currentToken = "";
+        this.currentLine = "";
         lineNum = 0;
 
         // set up input stream from the file.
@@ -92,7 +92,7 @@ public class Tokenizer {
                 return;
             }
             else{
-                System.err.println("Debug: impossible case in Tokenizer reached.");
+                // System.err.println("Debug: impossible case in Tokenizer reached. currentToken is: " + currentToken);
                 currentToken = "EOF";
                 // read last token from file, close input stream
                 file_scanner.close();

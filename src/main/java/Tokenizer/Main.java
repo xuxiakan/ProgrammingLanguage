@@ -14,7 +14,7 @@ public class Main {
     public static void main(String args[]) {
 
 
-/*        Tokenizer tokens = new Tokenizer("test/TokenizerTests/invalidSymbolError.txt");
+       /*Tokenizer tokens = new Tokenizer("test/TokenizerTests/invalidSymbolError.txt");
         do{
 
             System.out.println(tokens.currentToken());
@@ -25,12 +25,13 @@ public class Main {
 
         //Tokenizer tokens = new Tokenizer("main/java/Tokenizer/test1");
 
+        /*
         Tokenizer tokens = new Tokenizer("test/TokenizerTests/validUppercaseReservedWord.txt");
         ProgramNode prog = new ProgramNode();
         prog.parseProgram(tokens);
-        prog.printProgram();
+        prog.printProgram();*/
 
-/*
+
         File folder = new File("test/TokenizerTests/");
         File[] listOfFiles = folder.listFiles();
 
@@ -46,7 +47,7 @@ public class Main {
                 }while(tokens.currentToken()!=33);
                 System.out.println(tokens.currentToken());
             }
-        }*/
+        }
 /*
         File folder = new File("test/TokenizerTests/");
         File[] listOfFiles = folder.listFiles();
@@ -60,7 +61,7 @@ public class Main {
                 prog.printProgram();
             }
         }
-*/
+
 
 
 /*      ParserTests: All passed
