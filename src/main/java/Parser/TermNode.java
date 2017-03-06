@@ -8,17 +8,17 @@ import Tokenizer.Tokenizer;
  *  TermNodee.java
  *  @author Xiakan Xu
  */
-public class TermNode {
+class TermNode {
     private FacNode fac;
     private TermNode term;
     private int altNo;
-    public TermNode(){
+    protected TermNode(){
         this.fac = new FacNode();
         this.term = null;
         this.altNo = 1;
     }
 
-    public void parseTerm(Tokenizer t){
+    protected void parseTerm(Tokenizer t){
         this.fac.parseFac(t);
         if(t.currentToken.equals("*")){
             t.nextToken(); // get rid of '*'
@@ -28,7 +28,7 @@ public class TermNode {
         }
     }
 
-    public void printTerm(){
+    protected void printTerm(){
         this.fac.printFac();
         if(this.altNo == 2){
             System.out.print(" * ");
@@ -36,7 +36,7 @@ public class TermNode {
         }
     }
 
-    public int evaluateTerm(){
+    protected int evaluateTerm(){
         int termValue = this.fac.evaluateFac();
         if(this.altNo == 2){
             termValue = termValue*this.term.evaluateTerm();

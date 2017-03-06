@@ -7,8 +7,7 @@ import Tokenizer.Tokenizer;
  *  AssignNode.java
  *  @author Xiakan Xu
  */
-
-public class AssignNode {
+class AssignNode {
 
     private IdNode idNode;
     private ExpNode expNode;
@@ -19,14 +18,14 @@ public class AssignNode {
      *
      */
 
-    public AssignNode(){
+    protected AssignNode(){
         this.lineNum = -1;
         this.idNode = null;
         this.expNode = new ExpNode();
     }
 
 
-    public void parseAssign(Tokenizer t){
+    protected void parseAssign(Tokenizer t){
         this.lineNum = t.lineNum;
         this.idNode = idNode.parserID(t);
 
@@ -51,7 +50,7 @@ public class AssignNode {
         }
     }
 
-    public void printAssign(int tabs){
+    protected void printAssign(int tabs){
         for(int i = 0; i < tabs; i++){
             System.out.print("\t");
         }
@@ -61,7 +60,7 @@ public class AssignNode {
         System.out.print(";\n");
     }
 
-    public void execAssign(){
+    protected void execAssign(){
         if(!this.idNode.isDeclared()){
             System.err.println("Execute error(Line " + this.lineNum+") Variable: " +
                     idNode.getName() + " undeclared.");

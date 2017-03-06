@@ -7,19 +7,18 @@ import Tokenizer.Tokenizer;
  *  IdListNode.java
  *  @author Xiakan Xu
  */
-
-public class IdListNode {
+class IdListNode {
     private IdNode idNode;
     private IdListNode idListNode;
     private int altNo;
 
-    public IdListNode(){
+    protected IdListNode(){
         this.idNode = null;
         this.idListNode = null;
         this.altNo = 1;
     }
 
-    public void parseIdList(Tokenizer t, boolean declare){
+    protected void parseIdList(Tokenizer t, boolean declare){
         this.idNode = idNode.parserID(t);
 
         if(declare){
@@ -44,7 +43,7 @@ public class IdListNode {
         }
     };
 
-    public void printIdList(){
+    protected void printIdList(){
         idNode.printId();
         if(altNo == 2){
             System.out.print(", ");
@@ -52,7 +51,7 @@ public class IdListNode {
         }
     };
 
-    public void execIdList(boolean readMode){
+    protected void execIdList(boolean readMode){
         if(readMode){
             idNode.initialize();
             if(altNo == 2){

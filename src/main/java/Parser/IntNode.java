@@ -8,15 +8,15 @@ import Tokenizer.Tokenizer;
  *  @author Xiakan Xu
  */
 
-public class IntNode {
+class IntNode {
     private String integral;
     private boolean valid;
-    public IntNode(){
+    protected IntNode(){
         this.integral = new String();
         this.valid = false;
     }
 
-    public void parseInt(Tokenizer t){
+    protected void parseInt(Tokenizer t){
 
         if(t.isValidInt(t.currentToken)){
             this.integral = t.currentToken;
@@ -29,7 +29,7 @@ public class IntNode {
         t.nextToken();
     }
 
-    public void printInt(){
+    protected void printInt(){
         if(this.valid){
             System.out.print(this.integral);
         }
@@ -39,7 +39,7 @@ public class IntNode {
         }
     }
 
-    public int evaluateInt(){
+    protected int evaluateInt(){
         int value = 0;
         if(this.valid){
             value = Integer.parseInt(this.integral);

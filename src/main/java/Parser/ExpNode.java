@@ -7,19 +7,19 @@ import Tokenizer.Tokenizer;
  *  ExpNode.java
  *  @author Xiakan Xu
  */
-public class ExpNode {
+class ExpNode {
 
     private TermNode term;
     private ExpNode exp;
     private int altNo;
 
-    public ExpNode(){
+    protected ExpNode(){
         this.term = new TermNode();
         this.exp = null;
         this.altNo = 1;
     }
 
-    public void parseExp(Tokenizer t){
+    protected void parseExp(Tokenizer t){
         this.term.parseTerm(t);
         if(t.currentToken.equals("+")){
             t.nextToken(); // get rid of '+'
@@ -35,7 +35,7 @@ public class ExpNode {
         }
     }
 
-    public void printExp(){
+    protected void printExp(){
         this.term.printTerm();
         if(this.altNo == 2){
             System.out.print(" + ");
@@ -48,7 +48,7 @@ public class ExpNode {
 
     }
 
-    public int evaluateExp(){
+    protected int evaluateExp(){
         int expValue = this.term.evaluateTerm();
         if(this.altNo == 2){
             expValue += this.exp.evaluateExp();

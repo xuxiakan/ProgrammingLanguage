@@ -6,20 +6,20 @@ import Tokenizer.Tokenizer;
  *  IfNode.java
  *  @author Xiakan Xu
  */
-public class IfNode {
+class IfNode {
     private CondNode condition;
     private StmtSeqNode thenSeq;
     private StmtSeqNode elseSeq;
     private int altNo;
 
-    public IfNode(){
+    protected IfNode(){
         this.condition= new CondNode();
         this.thenSeq= new StmtSeqNode();
         this.elseSeq= null;
         this.altNo= 1;
     }
 
-    public void parseIf(Tokenizer t){
+    protected void parseIf(Tokenizer t){
 
         if(t.currentToken.equals("if")){
             t.nextToken(); // get rid of "if"
@@ -69,7 +69,7 @@ public class IfNode {
 
     }
 
-    public void printIf(int tabs){
+    protected void printIf(int tabs){
         for(int i = 0; i < tabs; i++){
             System.out.print("\t");
         }
@@ -91,7 +91,7 @@ public class IfNode {
     }
 
 
-    public void execIf(){
+    protected void execIf(){
         boolean c = condition.execCondition();
         if (c){
             thenSeq.execStmtSeq();

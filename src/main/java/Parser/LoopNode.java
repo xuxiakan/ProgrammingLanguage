@@ -7,16 +7,16 @@ import Tokenizer.Tokenizer;
  *  @author Xiakan Xu
  */
 
-public class LoopNode {
+class LoopNode {
     private CondNode condition;
     private StmtSeqNode statementSeq;
 
-    public LoopNode(){
+    protected LoopNode(){
         this.condition= new CondNode();
         this.statementSeq= new StmtSeqNode();
     }
 
-    public void parseLoop(Tokenizer t){
+    protected void parseLoop(Tokenizer t){
         if(t.currentToken.equals("while")){
             t.nextToken(); // get rid of "while"
         }
@@ -59,7 +59,7 @@ public class LoopNode {
 
     }
 
-    public void printLoop(int tabs){
+    protected void printLoop(int tabs){
         for(int i = 0; i < tabs; i++){
             System.out.print("\t");
         }
@@ -73,7 +73,7 @@ public class LoopNode {
         System.out.print("end;\n");
     }
 
-    public void execLoop(){
+    protected void execLoop(){
 
         while(this.condition.execCondition()){
             statementSeq.execStmtSeq();

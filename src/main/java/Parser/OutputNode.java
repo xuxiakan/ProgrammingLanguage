@@ -7,13 +7,13 @@ import Tokenizer.Tokenizer;
  *  OutputNode.java
  *  @author Xiakan Xu
  */
-public class OutputNode {
+class OutputNode {
     private IdListNode id_list;
-    public OutputNode(){
+    protected OutputNode(){
         this.id_list = new IdListNode();
     }
 
-    public void parseOutput(Tokenizer t) {
+    protected void parseOutput(Tokenizer t) {
         if(t.currentToken.equals("write")){
             t.nextToken(); // get rid of "write"
         }
@@ -35,7 +35,7 @@ public class OutputNode {
         }
     }
 
-    public void printOutput(int tabs){
+    protected void printOutput(int tabs){
         for(int i = 0; i < tabs; i++){
             System.out.print("\t");
         }
@@ -44,7 +44,7 @@ public class OutputNode {
         System.out.print(";\n");
     }
 
-    public void execOutput(){
+    protected void execOutput(){
         this.id_list.execIdList(false);
     }
 }

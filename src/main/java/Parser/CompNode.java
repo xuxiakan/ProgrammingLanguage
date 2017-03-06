@@ -8,18 +8,18 @@ import Tokenizer.Tokenizer;
  *  @author Xiakan Xu
  */
 
-public class CompNode {
+class CompNode {
     private FacNode fac1;
     private CompOpNode comp_op;
     private FacNode fac2;
 
-    public CompNode(){
+    protected CompNode(){
         this.fac1 = new FacNode();
         this.fac2 = new FacNode();
         this.comp_op = new CompOpNode();
     }
 
-    public void parseComp(Tokenizer t){
+    protected void parseComp(Tokenizer t){
         if(t.currentToken.equals("(")){
             t.nextToken(); // get rid of '('
         }
@@ -41,7 +41,7 @@ public class CompNode {
         }
     }
 
-    public void printComp(){
+    protected void printComp(){
         System.out.print("(");
         this.fac1.printFac();
         this.comp_op.printCompOp();
@@ -49,7 +49,7 @@ public class CompNode {
         System.out.print(")");
     }
 
-    public boolean execComp(){
+    protected boolean execComp(){
         int fac1 = this.fac1.evaluateFac();
         int fac2 = this.fac2.evaluateFac();
         boolean compResult = false;

@@ -9,21 +9,21 @@ import Tokenizer.Tokenizer;
  *  @author Xiakan Xu
  */
 
-public class CondNode {
+class CondNode {
 
     private int altNo;
     private CompNode compNode;
     private CondNode condition1;
     private CondNode condition2;
 
-    public CondNode(){
+    protected CondNode(){
         this.altNo = 0;
         this.compNode = null;
         this.condition1 = null;
         this.condition2 = null;
     }
 
-    public void parseCondition(Tokenizer t){
+    protected void parseCondition(Tokenizer t){
         if(t.currentToken.equals("!")){
             t.nextToken(); // get rid of '!'
             this.altNo = 2;
@@ -67,7 +67,7 @@ public class CondNode {
         }
     }
 
-    public void printCondition(){
+    protected void printCondition(){
         switch(this.altNo){
             case 1: this.compNode.printComp();
                     break;
@@ -94,8 +94,8 @@ public class CondNode {
         }
     }
 
-    public boolean execCondition(){
-        boolean cond;
+    protected boolean execCondition(){
+        boolean cond = false;
         switch(this.altNo){
             case 1: cond = this.compNode.execComp();
                 break;
@@ -111,6 +111,6 @@ public class CondNode {
                 System.exit(2);
                 break;
         }
-        return false;
+        return cond;
     }
 }

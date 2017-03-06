@@ -8,18 +8,18 @@ import Tokenizer.Tokenizer;
  *  StmtSeqNode.java
  *  @author Xiakan Xu
  */
-public class StmtSeqNode {
+class StmtSeqNode {
     private StmtNode stmtNode;
     private StmtSeqNode stmtSeqNode;
     private int altNo;
 
-    public StmtSeqNode(){
+    protected StmtSeqNode(){
         this.stmtNode = new StmtNode();
         this.stmtSeqNode = null;
         altNo = 1;
     }
 
-    public void parseStmtSeq(Tokenizer t){
+    protected void parseStmtSeq(Tokenizer t){
         stmtNode.parseStmt(t);
 
         // if next is stmt-seq
@@ -36,7 +36,7 @@ public class StmtSeqNode {
         }
     }
 
-    public void printStmtSeq(int tabs) {
+    protected void printStmtSeq(int tabs) {
         this.stmtNode.printStmt(tabs);
         if (this.altNo == 2) {
             this.stmtSeqNode.printStmtSeq(tabs);
@@ -44,7 +44,7 @@ public class StmtSeqNode {
     }
 
 
-    public void execStmtSeq(){
+    protected void execStmtSeq(){
         this.stmtNode.execStmt();
         if (this.altNo == 2) {
             this.stmtSeqNode.execStmtSeq();

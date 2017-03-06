@@ -7,14 +7,14 @@ import Tokenizer.Tokenizer;
  *  DeclNode.java
  *  @author Xiakan Xu
  */
-public class DeclNode {
+class DeclNode {
     private IdListNode idList;
 
-    public DeclNode(){
+    protected DeclNode(){
         this.idList = new IdListNode();
     }
 
-    public void parseDecl(Tokenizer t){
+    protected void parseDecl(Tokenizer t){
 
         if(t.currentToken.equals("int")){
             t.nextToken(); // get rid of "int"
@@ -35,13 +35,13 @@ public class DeclNode {
         }
     }
 
-    public void printDecl(){
+    protected void printDecl(){
         System.out.print("int ");
         this.idList.printIdList();
         System.out.print(";\n");
     }
 
-    public void execDecl(){
+    protected void execDecl(){
         //
     }
 }

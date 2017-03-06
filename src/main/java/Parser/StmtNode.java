@@ -8,7 +8,7 @@ import Tokenizer.Tokenizer;
  *  @author Xiakan Xu
  */
 
-public class StmtNode {
+class StmtNode {
 
     private AssignNode assign;
     private IfNode ifNode;
@@ -17,7 +17,7 @@ public class StmtNode {
     private OutputNode output;
     private int altNo;
 
-    public StmtNode(){
+    protected StmtNode(){
         this.assign= null;
         this.ifNode= null;
         this.loop= null;
@@ -26,7 +26,7 @@ public class StmtNode {
         this.altNo= 1;;
     }
 
-    public void parseStmt(Tokenizer t){
+    protected void parseStmt(Tokenizer t){
         String tok= t.currentToken;
         //t.nextToken();
          if(tok.equals("if")){ //tok is if
@@ -65,7 +65,7 @@ public class StmtNode {
         }
     }
 
-    public void printStmt(int tabs){
+    protected void printStmt(int tabs){
         if(altNo == 1){
             assign.printAssign(tabs);
         }
@@ -88,7 +88,7 @@ public class StmtNode {
         }
     }
 
-    public void execStmt(){
+    protected void execStmt(){
         if(altNo == 1){
             assign.execAssign();
         }

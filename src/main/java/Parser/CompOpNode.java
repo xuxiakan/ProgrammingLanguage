@@ -9,14 +9,14 @@ import Tokenizer.Tokenizer;
  *  @author Xiakan Xu
  */
 
-public class CompOpNode {
+class CompOpNode {
     private String op;
     private int altNo;
-    public CompOpNode(){
+    protected CompOpNode(){
         this.op = "";
         this.altNo = 0;
     }
-    public void  parseCompOp(Tokenizer t){
+    protected void  parseCompOp(Tokenizer t){
         this.op = t.currentToken;
         if(this.op.equals("!=")){
             this.altNo = 1;
@@ -44,11 +44,11 @@ public class CompOpNode {
         t.nextToken(); // get rid of this compare operator
     }
 
-    public void printCompOp(){
+    protected void printCompOp(){
         System.out.print(this.op);
     }
 
-    public int execCompOp(){
+    protected int execCompOp(){
         if(this.altNo == 0){
             // should never happen
             System.err.println("Error: CompOp invalid");

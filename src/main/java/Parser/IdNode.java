@@ -13,7 +13,7 @@ import Tokenizer.Tokenizer;
  *  @author Xiakan Xu
  */
 
-public class IdNode {
+class IdNode {
     private String name;
     private int value;
     private boolean initialized;
@@ -26,7 +26,7 @@ public class IdNode {
         this.declared = false;
     }
 
-    public static IdNode parserID(Tokenizer t){
+    protected static IdNode parserID(Tokenizer t){
 
         String tok = t.currentToken;
         if(!t.isValidIdentifier(tok)){
@@ -47,20 +47,20 @@ public class IdNode {
         return symTab.get(tok);
     }
 
-    public void setDeclared(){
+    protected void setDeclared(){
         this.declared = true;
     }
 
-    public boolean isDeclared(){
+    protected boolean isDeclared(){
         return this.declared;
     }
 
-    public  void setValue(int v){
+    protected  void setValue(int v){
         this.value = v;
         this.initialized = true;
     }
 
-    public void initialize(){
+    protected void initialize(){
         if(this.initialized){
             System.err.println("Warning: read a variable who already has a value");
         }
@@ -77,7 +77,7 @@ public class IdNode {
         }
     }
 
-    public int getValue(){
+    protected int getValue(){
         if(!this.declared){
             System.err.print("Execute error: id : "+ this.getName() + " has not been declared.");
             System.exit(3);
@@ -89,14 +89,14 @@ public class IdNode {
         return this.value;
     }
 
-    public  String getName(){
+    protected  String getName(){
         return this.name;
     }
 
-    public void printId(){
+    protected void printId(){
         System.out.print(getName());
     }
-    public void write(){
+    protected void write(){
         if(!this.declared){
             System.err.print("Execute error: id : "+ this.getName() + " has not been declared.");
             System.exit(3);
@@ -108,7 +108,7 @@ public class IdNode {
         System.out.println(this.getName() + " = " + this.getValue());
     }
 
-    public static boolean isValidInt(String token){
+    protected static boolean isValidInt(String token){
         boolean isValid = true;
         Pattern integers = Pattern.compile("[0-9]+");
 

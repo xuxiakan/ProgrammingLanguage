@@ -9,19 +9,19 @@ import Tokenizer.Tokenizer;
  *  @author Xiakan Xu
  */
 
-public class FacNode {
+class FacNode {
     private IntNode integral;
     private IdNode id;
     private ExpNode exp;
     private int altNo;
-    public FacNode(){
+    protected FacNode(){
         this.altNo = 0;
         this.integral = null;
         this.id = null;
         this.exp = null;
     }
 
-    public void parseFac(Tokenizer t){
+    protected void parseFac(Tokenizer t){
 
         if(t.isValidInt(t.currentToken)){
             this.integral = new IntNode();
@@ -46,7 +46,7 @@ public class FacNode {
         }
     }
 
-    public void printFac(){
+    protected void printFac(){
         switch (this.altNo){
             case 1:
                 this.integral.printInt();
@@ -67,7 +67,7 @@ public class FacNode {
         }
     }
 
-    public int evaluateFac(){
+    protected int evaluateFac(){
         int facValue = 0;
         switch (this.altNo){
             case 1:

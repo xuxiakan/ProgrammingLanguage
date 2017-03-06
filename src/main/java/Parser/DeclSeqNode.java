@@ -6,7 +6,7 @@ import Tokenizer.Tokenizer;
  *  DeclSeqNode.java
  *  @author Xiakan Xu
  */
-public class DeclSeqNode {
+class DeclSeqNode {
     private DeclNode declNode;
     private DeclSeqNode declSeqNode;
     private int altNo;
