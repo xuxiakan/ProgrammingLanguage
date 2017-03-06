@@ -1,12 +1,12 @@
-package NodeClasses;
+package Parser;
 
 import Tokenizer.Tokenizer;
-
 /**
- * Created by xu.1487 on 2017/2/18.
+ *  CSE 3341 Programming Assignment 02
+ *  IfNode.java
+ *  @author Xiakan Xu
  */
-
-public class IfNode implements IfNode_interface {
+public class IfNode {
     private CondNode condition;
     private StmtSeqNode thenSeq;
     private StmtSeqNode elseSeq;
@@ -90,7 +90,7 @@ public class IfNode implements IfNode_interface {
         System.out.print("end;\n");
     }
 
-    // TODO: check this implement in next Assignment
+
     public void execIf(){
         boolean c = condition.execCondition();
         if (c){

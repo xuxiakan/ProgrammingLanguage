@@ -1,9 +1,10 @@
-package NodeClasses;
+package Parser;
 
 import Tokenizer.Tokenizer;
-
 /**
- * Created by xu.1487 on 2017/2/18.
+ *  CSE 3341 Programming Assignment 02
+ *  DeclSeqNode.java
+ *  @author Xiakan Xu
  */
 public class DeclSeqNode {
     private DeclNode declNode;
@@ -36,8 +37,9 @@ public class DeclSeqNode {
     }
 
     public void execDeclSeq(){
-        //TODO: implement for next Assignment;
-        System.err.println("Error: Not implement until next Assignment");
-        System.exit(99);
+        declNode.execDecl();
+        if(altNo == 2){
+            declSeqNode.execDeclSeq();
+        }
     }
 }

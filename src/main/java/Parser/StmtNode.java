@@ -1,12 +1,14 @@
-package NodeClasses;
+package Parser;
 
 import Tokenizer.Tokenizer;
 
 /**
- * Created by xu.1487 on 2017/2/18.
+ *  CSE 3341 Programming Assignment 02
+ *  StmtNode.java
+ *  @author Xiakan Xu
  */
 
-public class StmtNode implements StmtNode_interface {
+public class StmtNode {
 
     private AssignNode assign;
     private IfNode ifNode;
@@ -27,12 +29,7 @@ public class StmtNode implements StmtNode_interface {
     public void parseStmt(Tokenizer t){
         String tok= t.currentToken;
         //t.nextToken();
-        if(t.isValidIdentifier(tok)){ //TODO case incomplete
-            assign = new AssignNode();
-            altNo= 1;
-            assign.parseAssign(t);
-        }
-        else if(tok.equals("if")){ //tok is if
+         if(tok.equals("if")){ //tok is if
             ifNode= new IfNode();
             altNo= 2;
             ifNode.parseIf(t);
@@ -52,6 +49,15 @@ public class StmtNode implements StmtNode_interface {
             altNo= 5;
             output.parseOutput(t) ;
         }
+         else if(t.isReservedWords(tok.toLowerCase()) && t.isValidIdentifier(tok)) {
+             System.err.println("Parser error(Line " + t.lineNum+"): Assign expects a valid ID, but '" + t.currentToken + "' is a reserved word.");
+             System.exit(2);
+         }
+        else if(t.isValidIdentifier(tok)) {
+             assign = new AssignNode();
+             altNo = 1;
+             assign.parseAssign(t);
+         }
         else{
             // should never happen, this error has been checked by StmtSeqNode
             System.err.println("Error: invalid Stmt Node, currentToken is: " + tok + ", line number is " + t.lineNum);
@@ -83,9 +89,6 @@ public class StmtNode implements StmtNode_interface {
     }
 
     public void execStmt(){
-        //TODO: implement for next Assignment;
-        System.err.println("Error: Not implement until next Assignment");
-        System.exit(99);
         if(altNo == 1){
             assign.execAssign();
         }
@@ -102,7 +105,8 @@ public class StmtNode implements StmtNode_interface {
             output.execOutput();
         }
         else{
-            System.err.println("Error: this error should never happened, debug code!");
+            System.err.println("Debug error: unknown statement found!");
+            System.exit(99);
         }
     }
 }

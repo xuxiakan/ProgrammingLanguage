@@ -1,9 +1,12 @@
-package NodeClasses;
+package Parser;
 
 import Tokenizer.Tokenizer;
 
+
 /**
- * Created by xu.1487 on 2017/2/25.
+ *  CSE 3341 Programming Assignment 02
+ *  FacNode.java
+ *  @author Xiakan Xu
  */
 
 public class FacNode {
@@ -62,6 +65,27 @@ public class FacNode {
                 System.exit(2);
                 break;
         }
+    }
+
+    public int evaluateFac(){
+        int facValue = 0;
+        switch (this.altNo){
+            case 1:
+                facValue = this.integral.evaluateInt();
+                break;
+            case 2:
+                facValue = this.id.getValue();
+                break;
+            case 3:
+                facValue = this.exp.evaluateExp();
+                break;
+            default:
+                System.err.println("Unexpected error found in evaluateFac.");
+                // this error should never happened.
+                System.exit(3);
+                break;
+        }
+        return facValue;
     }
 
 }

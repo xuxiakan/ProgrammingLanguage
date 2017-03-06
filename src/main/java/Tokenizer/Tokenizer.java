@@ -53,7 +53,7 @@ public class Tokenizer {
             }
         }
         catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Tokenizer error: CORE Program file not found.");
             System.exit(1);
         }
 
@@ -69,11 +69,13 @@ public class Tokenizer {
      */
     public static void nextToken(){
 
+/*
         // case: currentToken is EOF, no next token exist and error message will be displayed.
         if(currentToken!=null && currentToken.equals("EOF")){
             System.out.print("Tokenizer error(Line " + lineNum + "): nextToken cannot be called at the end of file");
             return;
         }
+*/
 
         String nextToken = new String();
         int numOfBeginningSpaces = 0;
@@ -92,7 +94,8 @@ public class Tokenizer {
                 return;
             }
             else{
-                // System.err.println("Debug: impossible case in Tokenizer reached. currentToken is: " + currentToken);
+                // only happens when extra tokens found after a CORE program,
+                // but it is a parser error, so ignored here.
                 currentToken = "EOF";
                 // read last token from file, close input stream
                 file_scanner.close();
@@ -204,6 +207,8 @@ public class Tokenizer {
                 case "or":
                     tokenID = 13;
                     break;
+                case "EOF":
+                    tokenID = 33;
             }
         }
         else if(isSpecialSymbols(currentToken)){
@@ -267,9 +272,6 @@ public class Tokenizer {
         else if(isValidIdentifier(currentToken)){
             tokenID = 32;
         }
-        else if(currentToken=="EOF"){
-            tokenID = 33;
-        }
         else{
             // Normally should never happened.
             System.out.println("Error, unidentified token ID");
@@ -291,11 +293,11 @@ public class Tokenizer {
      */
     public static boolean isReservedWords(String token){
         boolean isValid = true;
-        Pattern rw = Pattern.compile("program|begin|end|int|if|then|else|while|loop|read|write|and|or");
+        Pattern rw = Pattern.compile("program|begin|end|int|if|then|else|while|loop|read|write|and|or|EOF");
 
 
         // Compare with reserved words regex pattern
-        if(!rw.matcher(token.toLowerCase()).matches()){
+        if(!rw.matcher(token).matches()){
             isValid = false;
         }
         return isValid;
@@ -366,7 +368,7 @@ public class Tokenizer {
      */
     public static boolean isValidIdentifier(String token){
         boolean isValid = true;
-        Pattern identifiers = Pattern.compile("[A-Z][a-z]*[0-9]*");
+        Pattern identifiers = Pattern.compile("[A-Z]*[0-9]*");
 
         // Identifier must has a max length of 8 chars.
         if(token.length() > 8){
@@ -380,7 +382,8 @@ public class Tokenizer {
         return isValid;
     }
 
-    public static void main(String args[]) {
+    // PA1 only
+/*    public static void main(String args[]) {
 
         // initialize tokenizer object from argument.
 
@@ -396,5 +399,5 @@ public class Tokenizer {
 
         // print EOF token
         System.out.println(tokens.currentToken());
-    }
+    }*/
 }

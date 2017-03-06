@@ -1,9 +1,11 @@
-package NodeClasses;
+package Parser;
 
 import Tokenizer.Tokenizer;
 
 /**
- * Created by xu.1487 on 2017/2/25.
+ *  CSE 3341 Programming Assignment 02
+ *  IntNode.java
+ *  @author Xiakan Xu
  */
 
 public class IntNode {
@@ -35,5 +37,17 @@ public class IntNode {
             System.err.print("Parser Error: Cannot print invalid int node");
             System.exit(2);
         }
+    }
+
+    public int evaluateInt(){
+        int value = 0;
+        if(this.valid){
+            value = Integer.parseInt(this.integral);
+        }
+        else{
+            System.err.print("Execute error: integral is invalid");
+            System.exit(3);
+        }
+        return value;
     }
 }

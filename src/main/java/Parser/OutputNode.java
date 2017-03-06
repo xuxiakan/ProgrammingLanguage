@@ -1,11 +1,12 @@
-package NodeClasses;
+package Parser;
 
 import Tokenizer.Tokenizer;
 
 /**
- * Created by xu.1487 on 2017/2/18.
+ *  CSE 3341 Programming Assignment 02
+ *  OutputNode.java
+ *  @author Xiakan Xu
  */
-
 public class OutputNode {
     private IdListNode id_list;
     public OutputNode(){
@@ -22,7 +23,7 @@ public class OutputNode {
             System.exit(2);
         }
 
-        id_list.parseIdList(t);
+        id_list.parseIdList(t, false);
 
         if(t.currentToken.equals(";")){
             t.nextToken(); // get rid of ";"
@@ -44,8 +45,6 @@ public class OutputNode {
     }
 
     public void execOutput(){
-        //TODO: implement for next Assignment;
-        System.err.println("Error: Not implement until next Assignment");
-        System.exit(99);
+        this.id_list.execIdList(false);
     }
 }

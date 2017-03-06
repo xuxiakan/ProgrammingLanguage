@@ -1,8 +1,7 @@
-package Tokenizer;
+package main;
 
-import java.io.File;
-
-import NodeClasses.ProgramNode;
+import Parser.ProgramNode;
+import Tokenizer.Tokenizer;
 
 /**
  *      CSE 3341 Programming Assignment 01
@@ -25,14 +24,18 @@ public class Main {
 
         //Tokenizer tokens = new Tokenizer("main/java/Tokenizer/test1");
 
-        /*
-        Tokenizer tokens = new Tokenizer("test/TokenizerTests/validUppercaseReservedWord.txt");
+
+
+        Tokenizer tokens = new Tokenizer("test/TokenizerTests/test1");
         ProgramNode prog = new ProgramNode();
         prog.parseProgram(tokens);
-        prog.printProgram();*/
+        prog.printProgram();
+        System.out.println("========================");
+        prog.execProgram();
 
 
-        File folder = new File("test/TokenizerTests/");
+
+/*        File folder = new File("test/TokenizerTests/");
         File[] listOfFiles = folder.listFiles();
 
         for (File file : listOfFiles) {
@@ -47,7 +50,8 @@ public class Main {
                 }while(tokens.currentToken()!=33);
                 System.out.println(tokens.currentToken());
             }
-        }
+        }*/
+
 /*
         File folder = new File("test/TokenizerTests/");
         File[] listOfFiles = folder.listFiles();

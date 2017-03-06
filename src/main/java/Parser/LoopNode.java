@@ -1,9 +1,10 @@
-package NodeClasses;
+package Parser;
 
 import Tokenizer.Tokenizer;
-
 /**
- * Created by xu.1487 on 2017/2/18.
+ *  CSE 3341 Programming Assignment 02
+ *  LoopNode.java
+ *  @author Xiakan Xu
  */
 
 public class LoopNode {
@@ -73,8 +74,9 @@ public class LoopNode {
     }
 
     public void execLoop(){
-        //TODO: implement for next Assignment;
-        System.err.println("Error: Not implement until next Assignment");
-        System.exit(99);
+
+        while(this.condition.execCondition()){
+            statementSeq.execStmtSeq();
+        }
     }
 }

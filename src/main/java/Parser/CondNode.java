@@ -1,9 +1,12 @@
-package NodeClasses;
+package Parser;
 
 import Tokenizer.Tokenizer;
 
+
 /**
- * Created by xu.1487 on 2017/2/18.
+ *  CSE 3341 Programming Assignment 02
+ *  CondNode.java
+ *  @author Xiakan Xu
  */
 
 public class CondNode {
@@ -92,9 +95,22 @@ public class CondNode {
     }
 
     public boolean execCondition(){
-        //TODO: implement for next Assignment;
-        System.err.println("Error: Not implement until next Assignment");
-        System.exit(99);
+        boolean cond;
+        switch(this.altNo){
+            case 1: cond = this.compNode.execComp();
+                break;
+            case 2: cond = !this.condition1.execCondition();
+                break;
+            case 3: cond = this.condition1.execCondition() && this.condition2.execCondition();
+                break;
+            case 4: cond = this.condition1.execCondition() || this.condition2.execCondition();
+                break;
+
+            default:System.err.println("Unexpected error found in execCondition.");
+                // this error should never happened.
+                System.exit(2);
+                break;
+        }
         return false;
     }
 }

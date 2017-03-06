@@ -1,9 +1,12 @@
-package NodeClasses;
+package Parser;
 
 import Tokenizer.Tokenizer;
 
+
 /**
- * Created by xu.1487 on 2017/2/25.
+ *  CSE 3341 Programming Assignment 02
+ *  CompOpNode.java
+ *  @author Xiakan Xu
  */
 
 public class CompOpNode {
@@ -43,5 +46,14 @@ public class CompOpNode {
 
     public void printCompOp(){
         System.out.print(this.op);
+    }
+
+    public int execCompOp(){
+        if(this.altNo == 0){
+            // should never happen
+            System.err.println("Error: CompOp invalid");
+            System.exit(3);
+        }
+        return this.altNo;
     }
 }

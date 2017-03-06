@@ -1,11 +1,13 @@
-package NodeClasses;
+package Parser;
 
 import Tokenizer.Tokenizer;
 
-/**
- * Created by xu.1487 on 2017/2/25.
- */
 
+/**
+ *  CSE 3341 Programming Assignment 02
+ *  TermNodee.java
+ *  @author Xiakan Xu
+ */
 public class TermNode {
     private FacNode fac;
     private TermNode term;
@@ -32,5 +34,13 @@ public class TermNode {
             System.out.print(" * ");
             this.term.printTerm();
         }
+    }
+
+    public int evaluateTerm(){
+        int termValue = this.fac.evaluateFac();
+        if(this.altNo == 2){
+            termValue = termValue*this.term.evaluateTerm();
+        }
+        return termValue;
     }
 }

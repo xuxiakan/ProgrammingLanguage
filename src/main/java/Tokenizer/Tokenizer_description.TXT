@@ -1,0 +1,82 @@
+CSE 3341 Programming Assignment 01
+Tokenizer_description.TXT
+@author Xiakan Xu
+
+Introduction:
+============
+The Tokenizer class reads input stream from specified file, which contains tokens.
+The program prints each token id until find an error on tokens or reach the end of file.
+
+If illegal token found, output error message and indicate current line number.
+
+Design Concept:
+===============
+The constructor reads first line from input stream and call nextToken(),
+which set up first token as current token.
+
+nextToken() reads input stream line by line.
+If current line is empty, it set up next available line as current line unless reaches the end of file.
+
+In order to find tokens from current line, the method reads character by character until find a white space or next special symbol.
+Whenever it find a legal token, the method set it as current token and delete it from current line.
+
+APIs:
+=====
+1.
+    /**
+     * Constructor Tokenizer object from {@code file_name}
+     * and set up first token as {@code currentToken}
+     *
+     * @param file_name
+     *            {@code String} to read tokens from
+     * @requires <pre> file_name must exist
+     */
+    public Tokenizer(String file_name);
+
+2.
+    /**
+     * This method make next available token as {@code currentToken}
+     *  If any illegal token detected, the method will display the error message and {@code lineNum}.
+     *
+     * @requires <pre> currentToken is not EOF
+     */
+    public static void nextToken();
+
+3.
+    /**
+     * This method transfer currentToken into currentTokenID
+     * based on the requirement.
+     *
+     * @return int token ID based on {@code currentToken}
+     */
+    public static int currentToken();
+
+
+    /**
+    *   These four methods exams {@code token} follows convention of each category or not.
+    */
+4.  private static boolean isReservedWords(String token);
+5.  private static boolean isSpecialSymbols(String token);
+6.  private static boolean isValidInt(String token);
+7.  private static boolean isValidIdentifier(String token);
+
+Test and Debug:
+===============
+Methods 3~7 were tested by corresponding JUnit tests.
+
+
+public Tokenizer(String file_name)
+public static void nextToken()
+In order to test these two methods, I wrote some test input files.
+
+Some test files contains illegal tokens or other errors.
+For example, <= should be recognized as "<=", while => should be recognized as "=" and ">".
+
+Some test files contains word that is legal but may be recognized as an error.
+For example, a single line with a white space is legal but my program treated it as an error at the first time.
+
+
+After few test, the program is able to output correct results corresponding to the input file..
+
+
+

@@ -1,12 +1,13 @@
-package NodeClasses;
+package Parser;
 
 import Tokenizer.Tokenizer;
 
-/**
- * Created by xu.1487 on 2017/2/18.
- *  TODO: new implementation
- */
 
+/**
+ *  CSE 3341 Programming Assignment 02
+ *  StmtSeqNode.java
+ *  @author Xiakan Xu
+ */
 public class StmtSeqNode {
     private StmtNode stmtNode;
     private StmtSeqNode stmtSeqNode;
@@ -44,8 +45,9 @@ public class StmtSeqNode {
 
 
     public void execStmtSeq(){
-        //TODO: implement for next Assignment;
-        System.err.println("Error: Not implement until next Assignment");
-        System.exit(99);
+        this.stmtNode.execStmt();
+        if (this.altNo == 2) {
+            this.stmtSeqNode.execStmtSeq();
+        }
     }
 }

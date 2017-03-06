@@ -1,11 +1,12 @@
-package NodeClasses;
+package Parser;
 
 import Tokenizer.Tokenizer;
 
 /**
- * Created by xu.1487 on 2017/2/25.
+ *  CSE 3341 Programming Assignment 02
+ *  ExpNode.java
+ *  @author Xiakan Xu
  */
-
 public class ExpNode {
 
     private TermNode term;
@@ -47,7 +48,14 @@ public class ExpNode {
 
     }
 
-    public void execExp(){
-
+    public int evaluateExp(){
+        int expValue = this.term.evaluateTerm();
+        if(this.altNo == 2){
+            expValue += this.exp.evaluateExp();
+        }
+        else if(this.altNo == 3){
+            expValue -= this.exp.evaluateExp();
+        }
+        return expValue;
     }
 }

@@ -1,11 +1,12 @@
-package NodeClasses;
+package Parser;
 
 import Tokenizer.Tokenizer;
 
 /**
- * Created by xu.1487 on 2017/2/18.
+ *  CSE 3341 Programming Assignment 02
+ *  DeclNode.java
+ *  @author Xiakan Xu
  */
-
 public class DeclNode {
     private IdListNode idList;
 
@@ -23,7 +24,7 @@ public class DeclNode {
                     "but currentToken is: '" + t.currentToken + "'");
             System.exit(2);
         }
-        this.idList.parseIdList(t);
+        this.idList.parseIdList(t, true);
         if(t.currentToken.equals(";")){
             t.nextToken(); // get rid of ';'
         }
@@ -41,8 +42,6 @@ public class DeclNode {
     }
 
     public void execDecl(){
-        //TODO: implement for next Assignment;
-        System.err.println("Error: Not implement until next Assignment");
-        System.exit(99);
+        //
     }
 }
