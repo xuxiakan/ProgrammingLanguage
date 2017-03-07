@@ -26,7 +26,7 @@ public class Main {
 
 
 
-        Tokenizer tokens = new Tokenizer("test/TokenizerTests/test1");
+        Tokenizer tokens = new Tokenizer("test/ParserTests/test1.txt");
         ProgramNode prog = new ProgramNode();
         prog.parseProgram(tokens);
         prog.printProgram();

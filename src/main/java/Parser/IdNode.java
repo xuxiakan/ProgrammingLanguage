@@ -19,6 +19,7 @@ class IdNode {
     private boolean initialized;
     private boolean declared;
     private static Map<String, IdNode> symTab = new HashMap<String, IdNode>();
+    private static int lineNum;
 
     private IdNode(String n){
         this.name = n;
@@ -27,7 +28,7 @@ class IdNode {
     }
 
     protected static IdNode parserID(Tokenizer t){
-
+        lineNum = t.lineNum;
         String tok = t.currentToken;
         if(!t.isValidIdentifier(tok)){
             System.err.println("Parser error(Line " + t.lineNum+"): expect a valid ID, " +
@@ -61,9 +62,6 @@ class IdNode {
     }
 
     protected void initialize(){
-        if(this.initialized){
-            System.err.println("Warning: read a variable who already has a value");
-        }
         System.out.print(this.getName() + " =? ");
         Scanner stdin = new Scanner(System.in);
 
@@ -79,11 +77,13 @@ class IdNode {
 
     protected int getValue(){
         if(!this.declared){
-            System.err.print("Execute error: id : "+ this.getName() + " has not been declared.");
+            System.err.println("Execute error(Line " + lineNum+ "): Variable: " +
+                    this.getName() + " undeclared.");
             System.exit(3);
         }
         if(!this.initialized){
-            System.err.print("Execute error: id : "+ this.getName() + " has not been assigned a value.");
+            System.err.println("Execute error(Line " + lineNum+ "): Variable: " +
+                    this.getName() + " has been declared but not initialized.");
             System.exit(3);
         }
         return this.value;
@@ -98,11 +98,13 @@ class IdNode {
     }
     protected void write(){
         if(!this.declared){
-            System.err.print("Execute error: id : "+ this.getName() + " has not been declared.");
+            System.err.println("Execute error(Line " + lineNum+ "): Variable: " +
+                    this.getName() + " undeclared.");
             System.exit(3);
         }
         if(!this.initialized){
-            System.err.print("Execute error: id : "+ this.getName() + " has not been assigned a value.");
+            System.err.println("Execute error(Line " + lineNum+ "): Variable: " +
+                    this.getName() + " has been declared but not initialized.");
             System.exit(3);
         }
         System.out.println(this.getName() + " = " + this.getValue());
@@ -115,12 +117,12 @@ class IdNode {
 
         // Compare with integers regex pattern
         if(token.length() > 8){
-            System.err.print("Execute error: integral cannot exceed 8 characters.");
+            System.err.println("Execute error: integral cannot exceed 8 characters.");
             System.exit(3);
             isValid = false;
         }
         if(!integers.matcher(token).matches()){
-            System.err.print("Execute error: your input is not a valid integral");
+            System.err.println("Execute error: your input is not a valid integral");
             System.exit(3);
             isValid = false;
         }

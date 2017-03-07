@@ -1,5 +1,7 @@
 package Parser;
 
+import java.util.regex.Pattern;
+
 import Tokenizer.Tokenizer;
 
 
@@ -12,6 +14,7 @@ class TermNode {
     private FacNode fac;
     private TermNode term;
     private int altNo;
+    private static int lineNum;
     protected TermNode(){
         this.fac = new FacNode();
         this.term = null;
@@ -19,6 +22,7 @@ class TermNode {
     }
 
     protected void parseTerm(Tokenizer t){
+        this.lineNum = t.lineNum;
         this.fac.parseFac(t);
         if(t.currentToken.equals("*")){
             t.nextToken(); // get rid of '*'
@@ -41,6 +45,18 @@ class TermNode {
         if(this.altNo == 2){
             termValue = termValue*this.term.evaluateTerm();
         }
+        isValidInt(termValue);
         return termValue;
+    }
+
+    private static void isValidInt(int value){
+        if(value > 99999999){
+            System.err.print("Execute error(Line " + lineNum+"): intermediate values "+ value + " exceed 8 characters.");
+            System.exit(3);
+        }
+        if(value < 0){
+            System.err.print("Execute error(Line " + lineNum+"): intermediate values "+ value + " is not a valid integral.");
+            System.exit(3);
+        }
     }
 }

@@ -23,10 +23,9 @@ class IdListNode {
 
         if(declare){
             if(idNode.isDeclared()){
-                // TODO define error type
-                System.err.println("Error(Line " + t.lineNum+ "): Variable: " +
+                System.err.println("Parser error(Line " + t.lineNum+ "): Variable: " +
                     idNode.getName() + " has been declared.");
-                System.exit(3);
+                System.exit(2);
             }
             else{
                 idNode.setDeclared();

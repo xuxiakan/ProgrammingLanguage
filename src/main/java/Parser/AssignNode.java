@@ -62,7 +62,7 @@ class AssignNode {
 
     protected void execAssign(){
         if(!this.idNode.isDeclared()){
-            System.err.println("Execute error(Line " + this.lineNum+") Variable: " +
+            System.err.println("Execute error(Line " + lineNum+ "): Variable " +
                     idNode.getName() + " undeclared.");
             System.exit(3);
         }
