@@ -1,8 +1,6 @@
 program
-int Y;
+int X;
 begin
-  while (X>10) loop
-    write X;
     read X;
-    end;
+    write X;
 end

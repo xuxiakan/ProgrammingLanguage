@@ -61,14 +61,14 @@ class LoopNode {
 
     protected void printLoop(int tabs){
         for(int i = 0; i < tabs; i++){
-            System.out.print("\t");
+            System.out.print("  ");
         }
         System.out.print("while ");
         condition.printCondition();
         System.out.print(" loop\n");
         statementSeq.printStmtSeq(tabs + 1);
         for(int i = 0; i < tabs; i++){
-            System.out.print("\t");
+            System.out.print("  ");
         }
         System.out.print("end;\n");
     }

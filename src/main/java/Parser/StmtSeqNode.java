@@ -24,7 +24,7 @@ class StmtSeqNode {
 
         // if next is stmt-seq
         String tok = t.currentToken;
-        if(tok.equals("if") || tok.equals("while")|| tok.equals("read")|| tok.equals("write") || t.isValidIdentifier(tok)){//TODO case incomplete
+        if(tok.equals("if") || tok.equals("while")|| tok.equals("read")|| tok.equals("write") || t.isValidIdentifier(tok)){
             this.stmtSeqNode = new StmtSeqNode();
             this.altNo = 2;
             this.stmtSeqNode.parseStmtSeq(t);

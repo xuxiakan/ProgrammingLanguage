@@ -52,7 +52,7 @@ class AssignNode {
 
     protected void printAssign(int tabs){
         for(int i = 0; i < tabs; i++){
-            System.out.print("\t");
+            System.out.print("  ");
         }
         idNode.printId();
         System.out.print(" = ");
@@ -62,7 +62,7 @@ class AssignNode {
 
     protected void execAssign(){
         if(!this.idNode.isDeclared()){
-            System.err.println("Execute error(Line " + lineNum+ "): Variable " +
+            System.err.println("Execute error(Line " + lineNum+ "): execAssign(): Variable " +
                     idNode.getName() + " undeclared.");
             System.exit(3);
         }

@@ -37,7 +37,7 @@ class OutputNode {
 
     protected void printOutput(int tabs){
         for(int i = 0; i < tabs; i++){
-            System.out.print("\t");
+            System.out.print("  ");
         }
         System.out.print("write ");
         id_list.printIdList();

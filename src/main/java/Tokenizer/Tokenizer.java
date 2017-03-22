@@ -343,7 +343,7 @@ public class Tokenizer {
 
 
         // Compare with integers regex pattern
-        if(token.length() > 8){
+        if(token.replaceFirst("^0+(?!$)", "").length() > 8){
             //TODO display error message when Int invalid length
             isValid = false;
         }

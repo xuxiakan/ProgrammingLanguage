@@ -29,7 +29,7 @@ class DeclSeqNode {
     };
 
     public void printDeclSeq(){
-        System.out.print("\t");
+        System.out.print("  ");
         declNode.printDecl();
         if(altNo == 2){
             declSeqNode.printDeclSeq();

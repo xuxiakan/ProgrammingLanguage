@@ -71,7 +71,7 @@ class IfNode {
 
     protected void printIf(int tabs){
         for(int i = 0; i < tabs; i++){
-            System.out.print("\t");
+            System.out.print("  ");
         }
         System.out.print("if ");
         condition.printCondition();
@@ -79,13 +79,13 @@ class IfNode {
         thenSeq.printStmtSeq(tabs+1);
         if (altNo== 2){
             for(int i = 0; i < tabs; i++){
-                System.out.print("\t");
+                System.out.print("  ");
             }
             System.out.print("else\n");
             elseSeq.printStmtSeq(tabs+1);
         }
         for(int i = 0; i < tabs; i++){
-            System.out.print("\t");
+            System.out.print("  ");
         }
         System.out.print("end;\n");
     }

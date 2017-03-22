@@ -43,6 +43,11 @@ public class ProgramNode{
             System.err.println("Parser error(Line " + t.lineNum+"): prog expects \"end\", but currentToken is: '" + t.currentToken + "'");
             System.exit(2);
         }
+
+        if(!t.currentToken.equals("EOF")){
+            System.err.println("Parser error(Line " + t.lineNum+"): extra token " + t.currentToken +" found after prog ends");
+            System.exit(2);
+        }
         this.initialized = true;
     }
     public void printProgram(){
@@ -52,9 +57,9 @@ public class ProgramNode{
         }
         System.out.print("program\n");
         ds.printDeclSeq();
-        System.out.print("\tbegin\n");
+        System.out.print("  begin\n");
         ss.printStmtSeq(2);
-        System.out.print("\tend\n");
+        System.out.print("  end\n");
     }
 
     public void execProgram(){
@@ -65,6 +70,4 @@ public class ProgramNode{
         ds.execDeclSeq();
         ss.execStmtSeq();
     }
-
-
 }

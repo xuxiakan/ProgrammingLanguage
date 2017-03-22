@@ -77,12 +77,12 @@ class IdNode {
 
     protected int getValue(){
         if(!this.declared){
-            System.err.println("Execute error(Line " + lineNum+ "): Variable: " +
+            System.err.println("Execute error(Line " + lineNum+ "): getValue(): Variable: " +
                     this.getName() + " undeclared.");
             System.exit(3);
         }
         if(!this.initialized){
-            System.err.println("Execute error(Line " + lineNum+ "): Variable: " +
+            System.err.println("Execute error(Line " + lineNum+ "): getValue(): Variable: " +
                     this.getName() + " has been declared but not initialized.");
             System.exit(3);
         }
@@ -116,7 +116,8 @@ class IdNode {
 
 
         // Compare with integers regex pattern
-        if(token.length() > 8){
+        if(token.replaceFirst("^0+(?!$)", "").length() > 8){
+
             System.err.println("Execute error: integral cannot exceed 8 characters.");
             System.exit(3);
             isValid = false;

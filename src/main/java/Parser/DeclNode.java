@@ -42,6 +42,6 @@ class DeclNode {
     }
 
     protected void execDecl(){
-        //
+
     }
 }
